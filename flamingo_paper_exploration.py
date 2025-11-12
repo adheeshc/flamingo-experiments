@@ -298,11 +298,11 @@ def demo_perceiver_resampler():
 
     print("\n")
     num_runs = 100
-    print(f"Running benchmark for {num_runs} runs:")
 
     # Benchmark Perceiver Resampler
+    print(f"Running Perceiver Resampler benchmark for {num_runs} runs:")
     start_time = time.time()
-    for i in range(num_runs):
+    for i in tqdm(range(num_runs)):
         with torch.no_grad():
             visual_tokens = perceiver(visual_features)
     duration = time.time() - start_time
@@ -311,8 +311,9 @@ def demo_perceiver_resampler():
     perceiver_imgs_per_sec = batch_size / perceiver_time
 
     # Benchmark Direct Self-attention
+    print(f"Running Direct Self-attention Benchmark for {num_runs} runs:")
     start_time = time.time()
-    for _ in range(num_runs):
+    for _ in tqdm(range(num_runs)):
         with torch.no_grad():
             baseline_output = baseline(visual_features)
     baseline_duration = time.time() - start_time
