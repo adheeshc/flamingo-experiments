@@ -1,16 +1,11 @@
 """Flamingo Paper Deep Dive"""
 
-import math
 import time
-from typing import List, Optional, Tuple
+from typing import Optional
 
-import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from einops import rearrange, repeat
-from PIL import Image
-from torchvision.datasets import CIFAR10, MNIST
 from tqdm import tqdm
 
 # Import common layers
@@ -363,7 +358,7 @@ def demo_gated_cross_attention():
 # ============================================
 
 
-class miniFlamingo(nn.Module):
+class MiniFlamingo(nn.Module):
     """Mini Flamingo model for exploration
 
     Components:
@@ -476,7 +471,7 @@ def demo_mini_flamingo():
     print("=" * 60)
 
     # Create mini Flamingo
-    model = miniFlamingo(
+    model = MiniFlamingo(
         dim=512,
         num_visual_tokens=64,
         depth=4,
@@ -528,7 +523,6 @@ def demo_mini_flamingo():
         print(f"  Layer {i+1}: attn_gate={attn_gate:.6f}, ff_gate={ff_gate:.6f}")
 
     return model
-
 
 
 # ============================================
