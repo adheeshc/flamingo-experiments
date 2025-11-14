@@ -1,25 +1,19 @@
 """Flamingo Model Optimization Experiments"""
 
-import math
 import pickle as pkl
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, Optional
 
-import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 from einops import rearrange, repeat
 from PIL import Image
-from torchvision import datasets, transforms
-from torchvision.datasets import MNIST
-from tqdm import tqdm
+from torchvision import transforms
 
-# Import common layers
-from attention_layers import CrossAttention, PerceiverAttention, SelfAttentionLayer
+from attention_layers import PerceiverAttention
 from cifar_utils import CIFAR10VisionEncoder
 from feedforward import FeedForward
-from flamingo_paper_exploration import MiniFlamingo, PerceiverResampler
+from flamingo_paper_exploration import PerceiverResampler
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(device)
@@ -364,7 +358,7 @@ def demo_sparse_attention():
 
     # Compare different sparsity levels
     k_values = [256, 128, 64, 48, 32, 16]
-    print("\nonly attend to top-k visual tokens - Copmparing Speed and Memory")
+    print("\nonly attend to top-k visual tokens - Comparing Speed and Memory")
     print("\n" + "-" * 80)
     print(f"{'Top-K Tokens':<15} {'Time (ms)':<15} {'Memory (MB)':<15} {'Speedup':<15}")
     print("-" * 80)
